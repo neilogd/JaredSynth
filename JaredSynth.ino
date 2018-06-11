@@ -2,7 +2,7 @@
 #include <LiquidCrystal.h>
 
 #include <MozziGuts.h>
-#include <Oscil.h> // oscillator template
+#include <Oscil.h>
 #include <Smooth.h>
 #include <ADSR.h>
 
@@ -888,7 +888,11 @@ void updateControl()
  */
 int updateAudio()
 {
+#if AUDIO_MODE == HIFI
   return synthCore.UpdateAudio();
+#else
+  return synthCore.UpdateAudio() >> 6;
+#endif
 }
 
 
